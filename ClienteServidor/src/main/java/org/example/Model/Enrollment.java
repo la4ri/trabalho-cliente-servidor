@@ -1,9 +1,11 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "matriculas")
 public class Enrollment {
     @Id
@@ -21,8 +23,7 @@ public class Enrollment {
     @Column(name = "enrollment_date")
     private LocalDateTime enrollmentDate = LocalDateTime.now();
 
-    private Double progress; // Percentage progress, e.g., 0.0 to 100.0
 
-    // Getters and Setters
+    // Getters and Setters criados automaticamente
 }
 

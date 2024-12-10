@@ -1,9 +1,11 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "categorias")
 public class Category {
     @Id
@@ -18,6 +20,6 @@ public class Category {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Getters and Setters
+    // Getters and Setters criados automaticamente
 }
 

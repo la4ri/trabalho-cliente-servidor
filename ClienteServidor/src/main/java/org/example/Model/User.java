@@ -1,9 +1,11 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "usuario")
 public class User {
     @Id
@@ -15,7 +17,7 @@ public class User {
     private String senha;
 
     @Column(name = "ocupacao")
-    private String role; // "estudante", "professor" ou "admin"
+    private String ocupacao; // "estudante", "professor" ou "admin"
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -23,4 +25,5 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    // Getters and Setters criados automaticamente
 }

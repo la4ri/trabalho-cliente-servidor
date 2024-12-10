@@ -1,9 +1,12 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
+@Data
 @Table(name = "aulas")
 public class Lesson {
     @Id
@@ -16,9 +19,8 @@ public class Lesson {
     @Column(name = "order_index")
     private Integer order;
 
-    @ManyToOne
-    @JoinColumn(name = "curso_id")
-    private Course curso;
+    @ManyToMany(mappedBy = "aulas")
+    private Set<Course> cursos;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -26,6 +28,6 @@ public class Lesson {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Getters and Setters
+    // Getters and Setters criados automaticamente
 }
 
