@@ -18,37 +18,36 @@ public class CourseController {
     private CourseService cursoService;
 
     @GetMapping
-    public List<Course> listarTodos() {
+    public List<CourseDTO> listarTodos() {
         return cursoService.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Course> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<CourseDTO> buscarPorId(@PathVariable Long id) {
         return cursoService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Course> criar(@RequestBody CourseDTO cursoDTO) {
+    public ResponseEntity<CourseDTO> criar(@RequestBody CourseDTO cursoDTO) {
         try {
             Course cursoCriado = cursoService.salvar(cursoDTO);
-            return ResponseEntity.ok(cursoCriado);
+            return ResponseEntity.ok(cursoService.toCourseDTO(cursoCriado));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> atualizar(@PathVariable Long id, @RequestBody CourseDTO courseDTO) {
+    public ResponseEntity<CourseDTO> atualizar(@PathVariable Long id, @RequestBody CourseDTO courseDTO) {
         try {
             Course cursoAtualizado = cursoService.atualizar(id, courseDTO);
-            return ResponseEntity.ok(cursoAtualizado);
+            return ResponseEntity.ok(cursoService.toCourseDTO(cursoAtualizado));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
@@ -59,3 +58,4 @@ public class CourseController {
         return ResponseEntity.notFound().build();
     }
 }
+

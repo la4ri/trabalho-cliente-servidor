@@ -2,7 +2,9 @@ package org.example.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,20 +19,16 @@ public class Course {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private User usuarioId;
-
-    @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Category categoriaId;
 
     @ManyToMany
     @JoinTable(
-            name = "curso_aula", // Nome da tabela de junção
-            joinColumns = @JoinColumn(name = "curso_id"), // FK para Course
-            inverseJoinColumns = @JoinColumn(name = "aula_id") // FK para Lesson
+            name = "curso_aula",
+            joinColumns = @JoinColumn(name = "curso_id"),
+            inverseJoinColumns = @JoinColumn(name = "aula_id")
     )
-    private Set<Lesson> aulas; // Alterado para evitar confusão
+    private Set<Lesson> aulas;
 
     private Double preco;
 
@@ -40,6 +38,16 @@ public class Course {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Getters and Setters criados automaticamente
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Course)) return false;
+        Course course = (Course) o;
+        return Objects.equals(id, course.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
