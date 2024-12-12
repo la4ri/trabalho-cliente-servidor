@@ -2,6 +2,11 @@ package org.example.Controller;
 
 
 import org.example.Model.Certificate;
+import org.example.Model.Course;
+import org.example.Model.DTO.CertificateDTO;
+import org.example.Model.User;
+import org.example.Repository.CourseRepository;
+import org.example.Repository.UserRepository;
 import org.example.Service.CertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +21,12 @@ public class CertificateController {
     @Autowired
     private CertificateService certificadoService;
 
+    @Autowired
+    private UserRepository usuarioRepository;
+
+    @Autowired
+    private CourseRepository cursoRepository;
+
     @GetMapping
     public List<Certificate> listarTodos() {
         return certificadoService.listarTodos();
@@ -29,20 +40,23 @@ public class CertificateController {
     }
 
     @PostMapping
-    public Certificate criar(@RequestBody Certificate certificado) {
-        return certificadoService.salvar(certificado);
+    public ResponseEntity<Certificate> criar(@RequestBody CertificateDTO certificadoDTO) {
+        try {
+            Certificate certificadoCriado = certificadoService.salvar(certificadoDTO);
+            return ResponseEntity.ok(certificadoCriado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Certificate> atualizar(@PathVariable Long id, @RequestBody Certificate cursoAtualizado) {
-        return certificadoService.buscarPorId(id)
-                .map(certificadoExistente -> {
-                    certificadoExistente.setUsuario(cursoAtualizado.getUsuario());
-                    certificadoExistente.setCurso(cursoAtualizado.getCurso());
-                    certificadoExistente.setCertificadoUrl(cursoAtualizado.getCertificadoUrl());
-                    return ResponseEntity.ok(certificadoService.salvar(certificadoExistente));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Certificate> atualizar(@PathVariable Long id, @RequestBody CertificateDTO certificadoDTO) {
+        try {
+            Certificate certificadoAtualizado = certificadoService.atualizar(id, certificadoDTO);
+            return ResponseEntity.ok(certificadoAtualizado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{id}")

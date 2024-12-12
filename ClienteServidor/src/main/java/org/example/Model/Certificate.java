@@ -15,11 +15,11 @@ public class Certificate {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private User usuario;
+    private User usuarioId;
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
-    private Course curso;
+    private Course cursoId;
 
     @Column(name = "certificado_url")
     private String certificadoUrl;
