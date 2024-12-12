@@ -14,13 +14,13 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private User usuario;
+    private User usuarioId;
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
-    private Course curso;
+    private Course cursoId;
 
-    private Double amount; //total pago nos cursos
+    private Double valorPago;
 
     private String status; //"aprovado" ou "pendente"
 

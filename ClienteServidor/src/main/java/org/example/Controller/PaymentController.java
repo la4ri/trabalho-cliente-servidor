@@ -1,5 +1,6 @@
 package org.example.Controller;
 
+import org.example.Model.DTO.PaymentDTO;
 import org.example.Model.Payment;
 import org.example.Service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,12 @@ public class PaymentController {
     }
 
     @PostMapping
-    public Payment criar(@RequestBody Payment curso) {
-        return pagamentoService.salvar(curso);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Payment> atualizar(@PathVariable Long id, @RequestBody Payment pagamentoAtualizado) {
-        return pagamentoService.buscarPorId(id)
-                .map(pagamentoExistente -> {
-                    pagamentoExistente.setUsuario(pagamentoAtualizado.getUsuario());
-                    pagamentoExistente.setCurso(pagamentoAtualizado.getCurso());
-                    pagamentoExistente.setAmount(pagamentoAtualizado.getAmount());
-                    pagamentoExistente.setStatus(pagamentoAtualizado.getStatus());
-                    return ResponseEntity.ok(pagamentoService.salvar(pagamentoExistente));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Payment> criar(@RequestBody PaymentDTO pagamentoDTO) {
+        try {
+            Payment pagamentoEfetuado = pagamentoService.salvar(pagamentoDTO);
+            return ResponseEntity.ok(pagamentoEfetuado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
