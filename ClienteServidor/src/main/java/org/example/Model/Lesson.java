@@ -2,7 +2,9 @@ package org.example.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,11 +18,8 @@ public class Lesson {
     private String nomeAula;
     private String conteudoAula;
 
-    @Column(name = "order_index")
-    private Integer order;
-
-    @ManyToMany(mappedBy = "aulas")
-    private Set<Course> cursos;
+//    @ManyToMany(mappedBy = "aulas")
+//    private Set<Course> cursos;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -28,6 +27,16 @@ public class Lesson {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Getters and Setters criados automaticamente
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Lesson)) return false;
+//        Lesson lesson = (Lesson) o;
+//        return Objects.equals(id, lesson.id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
 }
-
