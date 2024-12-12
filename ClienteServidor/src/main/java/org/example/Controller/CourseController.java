@@ -1,6 +1,7 @@
 package org.example.Controller;
 
 import org.example.Model.Course;
+import org.example.Model.DTO.CourseDTO;
 import org.example.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,29 +30,25 @@ public class CourseController {
     }
 
     @PostMapping
-    public Course criar(@RequestBody Course curso) {
-        return cursoService.salvar(curso);
-    }
-
-    @PostMapping("/{id}/aulas")
-    public ResponseEntity<Course> adicionarAulas(@PathVariable Long id, @RequestBody Set<Long> lessonIds) {
-        Course course = cursoService.adicionarAula(id, lessonIds);
-        return ResponseEntity.ok(course);
+    public ResponseEntity<Course> criar(@RequestBody CourseDTO cursoDTO) {
+        try {
+            Course cursoCriado = cursoService.salvar(cursoDTO);
+            return ResponseEntity.ok(cursoCriado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> atualizar(@PathVariable Long id, @RequestBody Course cursoAtualizado) {
-        return cursoService.buscarPorId(id)
-                .map(cursoExistente -> {
-                    cursoExistente.setNomeCurso(cursoAtualizado.getNomeCurso());
-                    cursoExistente.setDescricao(cursoAtualizado.getDescricao());
-                    cursoExistente.setProfessor(cursoAtualizado.getProfessor());
-                    cursoExistente.setCategoria(cursoAtualizado.getCategoria());
-                    cursoExistente.setPreco(cursoAtualizado.getPreco());
-                    return ResponseEntity.ok(cursoService.salvar(cursoExistente));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Course> atualizar(@PathVariable Long id, @RequestBody CourseDTO courseDTO) {
+        try {
+            Course cursoAtualizado = cursoService.atualizar(id, courseDTO);
+            return ResponseEntity.ok(cursoAtualizado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {

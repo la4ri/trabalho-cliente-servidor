@@ -17,12 +17,12 @@ public class Course {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "professor_id")
-    private User professor;
+    @JoinColumn(name = "usuario_id")
+    private User usuarioId;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    private Category categoria;
+    private Category categoriaId;
 
     @ManyToMany
     @JoinTable(
