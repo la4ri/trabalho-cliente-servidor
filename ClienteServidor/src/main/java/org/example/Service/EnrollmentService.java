@@ -1,6 +1,7 @@
 package org.example.Service;
 
 import org.example.Model.Course;
+import org.example.Model.DTO.EnrollmentDTO;
 import org.example.Model.Enrollment;
 import org.example.Model.User;
 import org.example.Repository.CourseRepository;
@@ -32,19 +33,19 @@ public class EnrollmentService {
         return matriculaRepository.findById(id);
     }
 
-    public Enrollment salvar(Long usuario_id, Long curso_id) {
+    public Enrollment salvar(EnrollmentDTO enrollmentDTO) {
         // Busca o usuário pelo ID
-        User usuario = usuarioRepository.findById(usuario_id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado com o ID: " + usuario_id));
+        User usuario = usuarioRepository.findById(enrollmentDTO.getUsuarioId())
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado com o ID: " + enrollmentDTO.getUsuarioId()));
 
         // Busca o curso pelo ID
-        Course curso = cursoRepository.findById(curso_id)
-                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado com o ID: " + curso_id));
+        Course curso = cursoRepository.findById(enrollmentDTO.getCursoId())
+                .orElseThrow(() -> new IllegalArgumentException("Curso não encontrado com o ID: " + enrollmentDTO.getCursoId()));
 
         // Cria a matrícula
         Enrollment matricula = new Enrollment();
-        matricula.setUsuario(usuario);
-        matricula.setCurso(curso);
+        matricula.setUsuarioId(usuario);
+        matricula.setCursoId(curso);
 
         // Salva a matrícula
         return matriculaRepository.save(matricula);

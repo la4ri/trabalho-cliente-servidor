@@ -14,11 +14,11 @@ public class Enrollment {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private User usuario;
+    private User usuarioId;
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
-    private Course curso;
+    private Course cursoId;
 
     @Column(name = "enrollment_date")
     private LocalDateTime enrollmentDate = LocalDateTime.now();

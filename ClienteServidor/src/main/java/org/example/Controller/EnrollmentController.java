@@ -1,6 +1,7 @@
 package org.example.Controller;
 
 
+import org.example.Model.DTO.EnrollmentDTO;
 import org.example.Model.Enrollment;
 import org.example.Service.EnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,12 @@ public class EnrollmentController {
     }
 
     @PostMapping
-    public ResponseEntity<Enrollment> criar(@RequestParam Long usuario_id, @RequestParam Long curso_id) {
+    public ResponseEntity<Enrollment> criar(@RequestBody EnrollmentDTO enrollmentDTO) {
         try {
-            Enrollment matricula = matriculaService.salvar(usuario_id, curso_id);
-            return ResponseEntity.ok(matricula);
+            Enrollment matriculaCriada = matriculaService.salvar(enrollmentDTO);
+            return ResponseEntity.ok(matriculaCriada);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().build();
         }
     }
 
