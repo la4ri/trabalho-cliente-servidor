@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,14 +32,26 @@ public class CourseService {
         return cursoRepository.findAll().stream().map(this::toCourseDTO).collect(Collectors.toList());
     }
 
+    public Set<Course> findAllByIds(Set<Long> ids) {
+        // Verifica se os IDs são nulos ou vazios
+        if (ids == null || ids.isEmpty()) {
+            return new HashSet<>(); // Retorna um conjunto vazio
+        }
+        // Busca os cursos pelos IDs fornecidos
+        return new HashSet<>(cursoRepository.findAllById(ids));
+    }
+
     public Optional<CourseDTO> buscarPorId(Long id) {
         return cursoRepository.findById(id).map(this::toCourseDTO);
     }
 
     public Course salvar(CourseDTO courseDTO) {
         // Busca a categoria pelo ID fornecido
-        Category categoria = categoriaRepository.findById(courseDTO.getCategoriaId())
-                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada com o ID: " + courseDTO.getCategoriaId()));
+        Category categoria = null;
+        if (courseDTO.getCategoriaId() != null) {
+            categoria = categoriaRepository.findById(courseDTO.getCategoriaId())
+                    .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada com o ID: " + courseDTO.getCategoriaId()));
+        }
 
         // Cria um novo curso
         Course curso = new Course();
@@ -83,6 +96,9 @@ public class CourseService {
     }
 
     public void deletar(Long id) {
+        if (!cursoRepository.existsById(id)) {
+            throw new IllegalArgumentException("Curso não encontrado com o ID: " + id);
+        }
         cursoRepository.deleteById(id);
     }
 
@@ -107,5 +123,4 @@ public class CourseService {
 
         return courseDTO;
     }
-
 }

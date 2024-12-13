@@ -3,6 +3,7 @@ package org.example.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -15,6 +16,14 @@ public class User {
     private String nome;
     private String email;
     private String senha;
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_curso", // Nome da tabela intermediária
+            joinColumns = @JoinColumn(name = "usuario_id"), // FK para User
+            inverseJoinColumns = @JoinColumn(name = "curso_id") // FK para Course
+    )
+    private Set<Course> cursos;
 
     @Column(name = "ocupacao")
     private String ocupacao; // "estudante", "professor" ou "admin"

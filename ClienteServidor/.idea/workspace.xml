@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="515bb553-2d5b-4524-8cea-291e28798205" name="Changes" comment="rota curso Funcionando/50">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/DTO/LessonDTO.java" afterDir="false" />
+    <list default="true" id="515bb553-2d5b-4524-8cea-291e28798205" name="Changes" comment="rota aulas Funcionando">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/DTO/UserDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/LessonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/LessonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/DTO/CourseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/DTO/CourseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Lesson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Repository/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Repository/CourseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Repository/LessonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Repository/LessonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Service/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Service/CourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Service/LessonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Service/LessonService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -58,7 +58,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "fix/course__user",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Github Desktop/trabalho-cliente-servidor/ClienteServidor",
@@ -177,7 +177,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734026755913</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="rota curso Funcionando">
+      <option name="closed" value="true" />
+      <created>1734035843483</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1734035843483</updated>
+    </task>
+    <task id="LOCAL-00012" summary="rota aulas Funcionando">
+      <option name="closed" value="true" />
+      <created>1734035859139</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1734035859139</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +218,8 @@
     <MESSAGE value="rota Enrollment Funcionando" />
     <MESSAGE value="rota Payment Funcionando" />
     <MESSAGE value="rota curso Funcionando/50" />
-    <option name="LAST_COMMIT_MESSAGE" value="rota curso Funcionando/50" />
+    <MESSAGE value="rota curso Funcionando" />
+    <MESSAGE value="rota aulas Funcionando" />
+    <option name="LAST_COMMIT_MESSAGE" value="rota aulas Funcionando" />
   </component>
 </project>

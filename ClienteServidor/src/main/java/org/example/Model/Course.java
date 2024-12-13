@@ -30,6 +30,9 @@ public class Course {
     )
     private Set<Lesson> aulas;
 
+    @ManyToMany(mappedBy = "cursos") // Relacionamento bidirecional com User
+    private Set<User> usuarios;
+
     private Double preco;
 
     @Column(name = "created_at")
