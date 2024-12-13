@@ -62,6 +62,7 @@ public class UserController {
                     // Atualiza os campos do usuário
                     usuarioExistente.setNome(userDTO.getNome());
                     usuarioExistente.setEmail(userDTO.getEmail());
+                    usuarioExistente.setSenha(userDTO.getSenha());
                     usuarioExistente.setOcupacao(userDTO.getOcupacao());
 
                     // Atualiza os cursos
@@ -91,6 +92,7 @@ public class UserController {
         dto.setId(user.getId());
         dto.setNome(user.getNome());
         dto.setEmail(user.getEmail());
+        dto.setSenha(user.getSenha());
         dto.setOcupacao(user.getOcupacao());
         dto.setCursoIds(
                 user.getCursos().stream().map(Course::getId).collect(Collectors.toSet())
@@ -104,6 +106,7 @@ public class UserController {
         user.setNome(dto.getNome());
         user.setEmail(dto.getEmail());
         user.setOcupacao(dto.getOcupacao());
+        user.setSenha(dto.getSenha());
         user.setCursos(cursos);
         return user;
     }
