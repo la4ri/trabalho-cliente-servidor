@@ -3,7 +3,6 @@ package org.example.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,12 +33,6 @@ public class Course {
     private Set<User> usuarios;
 
     private Double preco;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {
