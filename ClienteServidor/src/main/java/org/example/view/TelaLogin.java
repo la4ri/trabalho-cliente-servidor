@@ -45,6 +45,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jButtonLogin = new javax.swing.JButton();
         jPasswordField = new javax.swing.JPasswordField();
         jButtonRegistrar = new javax.swing.JButton();
+        jButtonAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +133,15 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButtonAdmin.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonAdmin.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonAdmin.setText("ADMIN");
+        jButtonAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -140,13 +150,17 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonAdmin)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addComponent(jButtonAdmin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,20 +187,29 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-       // TODO add your handling code here:
-      
+        // TODO add your handling code here:
+        TelaCarrinhoDeCompras carrinho = new TelaCarrinhoDeCompras();
+        carrinho.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-         // Abre a tela de registro
-    TelaRegistro telaRegistrar = new TelaRegistro();
-    telaRegistrar.setVisible(true);
+        // Abre a tela de registro
+        TelaRegistro telaRegistrar = new TelaRegistro();
+        telaRegistrar.setVisible(true);
 
-    // Fecha ou oculta a tela de login atual
-    this.dispose(); // Fecha completamente a tela atual
-    // OU: this.setVisible(false); // Apenas oculta a tela atual
+        // Fecha ou oculta a tela de login atual
+        this.dispose(); // Fecha completamente a tela atual
+        // OU: this.setVisible(false); // Apenas oculta a tela atual
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
+
+    private void jButtonAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdminActionPerformed
+        // TODO add your handling code here:
+        TelaMenuOpcoes menu = new TelaMenuOpcoes();
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +247,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdmin;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JLabel jLabel3;

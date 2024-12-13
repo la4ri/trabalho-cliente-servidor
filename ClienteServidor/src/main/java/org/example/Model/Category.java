@@ -21,5 +21,10 @@ public class Category {
     private LocalDateTime updatedAt;
 
     // Getters and Setters criados automaticamente
+
+    public Category() {
+        
+    }
+    
 }
 
