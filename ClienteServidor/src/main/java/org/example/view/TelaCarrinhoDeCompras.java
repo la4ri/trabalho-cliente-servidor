@@ -211,9 +211,9 @@ public class TelaCarrinhoDeCompras extends javax.swing.JFrame {
         }
 
         // Passa os IDs para a TelaPagamento
-        TelaFinalizarCompra telaPagamento = new TelaFinalizarCompra(selectedCourseIds);
+       /*TelaFinalizarCompra telaPagamento = new TelaFinalizarCompra(selectedCourseIds);
         telaPagamento.setVisible(true);
-        this.dispose(); // Fecha a tela atual
+        */
         this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jButtonFinalizarCompraActionPerformed
 

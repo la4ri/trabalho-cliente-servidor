@@ -4,19 +4,16 @@
  */
 package org.example.view;
 
-import java.util.List;
-
 /**
  *
  * @author caiov
  */
 public class TelaFinalizarCompra extends javax.swing.JFrame {
-  private List<Integer> cursoIds;
+
     /**
      * Creates new form TelaFinalizarCompra
      */
-    public TelaFinalizarCompra(List<Integer> cursoIds) {
-        this.cursoIds = cursoIds;
+    public TelaFinalizarCompra() {
         initComponents();
     }
 
