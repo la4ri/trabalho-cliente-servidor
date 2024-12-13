@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.example.Controller.CourseController;
 import org.example.Model.Course;
+import org.example.Model.DTO.CourseDTO;
 import org.example.Service.CourseService;
 
 /**
@@ -44,62 +45,63 @@ public class TelaCarrinhoDeCompras extends javax.swing.JFrame {
     }
 
     private void carregarCursos() {
-        try {
-            // Criação do HTTP Client
-            HttpClient client = HttpClient.newHttpClient();
+    try {
+        // Criação do HTTP Client
+        HttpClient client = HttpClient.newHttpClient();
 
-            // Criação da requisição GET
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/api/cursos"))
-                    .GET()
-                    .build();
+        // Criação da requisição GET
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/api/cursos"))
+                .GET()
+                .build();
 
-            // Envia a requisição e obtém a resposta
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        // Envia a requisição e obtém a resposta
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 200) {
-                // Verifica se a resposta está vazia
-                if (response.body() == null || response.body().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Nenhum curso encontrado.");
-                    return;
-                }
+        if (response.statusCode() == 200) {
+            // Verifica se a resposta está vazia
+            if (response.body() == null || response.body().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nenhum curso encontrado.");
+                return;
+            }
 
-                // Configura o ObjectMapper
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.registerModule(new JavaTimeModule());
-                objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+            // Configura o ObjectMapper
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-                // Converte o JSON em lista de objetos Course
-                List<Course> listaCursos = objectMapper.readValue(response.body(), new TypeReference<List<Course>>() {
-                });
+            // Converte o JSON em lista de objetos CourseDTO
+            List<CourseDTO> listaCursos = objectMapper.readValue(response.body(), new TypeReference<List<CourseDTO>>() {
+            });
 
-                // Obtém o modelo da tabela
-                DefaultTableModel model = (DefaultTableModel) jTableCursos.getModel();
-                // Limpa linhas existentes
-                model.setRowCount(0);
+            // Obtém o modelo da tabela
+            DefaultTableModel model = (DefaultTableModel) jTableCursos.getModel();
+            // Limpa linhas existentes
+            model.setRowCount(0);
 
-                // Itera sobre a lista de cursos e adiciona-os à tabela
-                for (Course c : listaCursos) {
-                    Object[] rowData = {
+            // Itera sobre a lista de cursos e adiciona-os à tabela
+            for (CourseDTO c : listaCursos) {
+                Object[] rowData = {
                         c.getId(),
                         c.getNomeCurso(),
                         c.getDescricao(),
                         (c.getAulas() != null ? c.getAulas().size() : 0),
                         c.getPreco()
-                    };
-                    model.addRow(rowData);
-                }
-
-            } else {
-                // Caso não seja 200, mostrar mensagem de erro
-                JOptionPane.showMessageDialog(this, "Erro ao carregar cursos: " + response.body());
+                };
+                model.addRow(rowData);
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao processar os dados recebidos: " + e.getMessage());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro inesperado ao carregar cursos: " + e.getMessage());
+
+        } else {
+            // Caso não seja 200, mostrar mensagem de erro
+            JOptionPane.showMessageDialog(this, "Erro ao carregar cursos: " + response.body());
         }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Erro ao processar os dados recebidos: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Erro inesperado ao carregar cursos: " + e.getMessage());
     }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,9 +184,7 @@ public class TelaCarrinhoDeCompras extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +199,7 @@ public class TelaCarrinhoDeCompras extends javax.swing.JFrame {
         int[] selectedRows = jTableCursos.getSelectedRows();
         if (selectedRows.length == 0) {
             JOptionPane.showMessageDialog(this, "Nenhum curso selecionado.");
-            return;
+         
         }
 
         List<Integer> selectedCourseIds = new ArrayList<>();
@@ -210,10 +210,9 @@ public class TelaCarrinhoDeCompras extends javax.swing.JFrame {
             selectedCourseIds.add(courseId);
         }
 
-        // Passa os IDs para a TelaPagamento
-       /*TelaFinalizarCompra telaPagamento = new TelaFinalizarCompra(selectedCourseIds);
-        telaPagamento.setVisible(true);
-        */
+        TelaFinalizarCompra pagamento = new TelaFinalizarCompra();
+        pagamento.setVisible(true);
+
         this.dispose(); // Fecha a tela atual
     }//GEN-LAST:event_jButtonFinalizarCompraActionPerformed
 

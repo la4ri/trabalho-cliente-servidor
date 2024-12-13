@@ -227,7 +227,11 @@ public class TelaRegistro extends javax.swing.JFrame {
 
             if (response.statusCode() == 200 || response.statusCode() == 201) {
                 JOptionPane.showMessageDialog(this, "Usuário registrado com sucesso!");
-                //limparCampos();
+                TelaCarrinhoDeCompras carrinho = new TelaCarrinhoDeCompras();
+                carrinho.setVisible(true);
+
+                // Fecha ou oculta a tela de login atual
+                this.dispose(); // Fecha completamente a tela atual
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao registrar usuário: " + response.body());
             }
